@@ -1,13 +1,8 @@
 ﻿namespace Scheduling.Domain.Periodic;
 
-public class TimeRage
+public class TimeRage : Range<TimeOnly>
 {
-    public TimeRage(TimeOnly beginTime, TimeOnly endTime)
+    public TimeRage(TimeOnly minimum, TimeOnly maximum) : base(minimum, maximum)
     {
-        BeginTime = beginTime;
-        EndTime = endTime;
     }
-
-    public TimeOnly BeginTime { get; private set; }
-    public TimeOnly EndTime { get; private set; }
 }

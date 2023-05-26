@@ -1,22 +1,17 @@
 ﻿namespace Scheduling.Domain.Periodic;
 
-public class DateRange
+public class DateRange : Range<DateOnly>
 {
-    public DateRange(DateOnly fromDate, DateOnly toDate)
+    public DateRange(DateOnly minimum, DateOnly maximum) : base(minimum, maximum)
     {
-        FromDate = fromDate;
-        ToDate = toDate;
     }
-
-    public DateOnly FromDate { get; private set; }
-    public DateOnly ToDate { get; private set; }
 
     public IEnumerable<DateOnly> EachDay()
     {
-        for (var day = FromDate; day <= ToDate; day = day.AddDays(1))
+        for (var day = Minimum; day <= Maximum; day = day.AddDays(1))
             yield return day;
     }
 
     public bool IsBetween(DateOnly date) =>
-        FromDate <= date && ToDate >= date;
+        Minimum <= date && Maximum >= date;
 }
